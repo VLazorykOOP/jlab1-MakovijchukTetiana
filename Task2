@@ -1,0 +1,47 @@
+import java.util.*;
+
+public class Task2 {
+    public static void main(String[] args) {
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.print("Введіть кількість елементів n (0 ≤ n ≤ 200): ");
+            if (!sc.hasNextInt()) {
+                System.out.println("Помилка: вкажіть ціле число для n.");
+                return;
+            }
+            int n = sc.nextInt();
+            if (n < 0 || n > 200) {
+                System.out.println("Помилка: n має бути в діапазоні 0..200.");
+                return;
+            }
+
+            int[] A = new int[n];
+            System.out.println("Введіть елементи масиву A:");
+            for (int i = 0; i < n; i++) {
+                if (!sc.hasNextInt()) {
+                    System.out.println("Помилка: очікується ціле число.");
+                    return;
+                }
+                A[i] = sc.nextInt();
+            }
+
+            
+            Set<Integer> seen = new HashSet<>();
+            Set<Integer> repeated = new LinkedHashSet<>();
+            for (int x : A) {
+                if (!seen.add(x)) {
+                    repeated.add(x);
+                }
+            }
+
+            if (repeated.isEmpty()) {
+                System.out.println("Немає повторюваних елементів у масиві A.");
+            } else {
+                System.out.println("Масив B (повторювані числа з A, по одному разу):");
+                for (int x : repeated) {
+                    System.out.print(x + " ");
+                }
+                System.out.println();
+            }
+        }
+    }
+}
